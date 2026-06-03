@@ -1,0 +1,26 @@
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.pfx
+secrets/
+private/
+
+# Local outputs
+outputs/
+cache/
+tmp/
+temp/
+logs/
+
+# Obsidian local files
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.trash/
+
+# System files
+Thumbs.db
+.DS_Store
+
