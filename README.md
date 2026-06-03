@@ -87,6 +87,11 @@ AI 真正缺的通常不是 prompt，而是项目现场。
 
 我会优先回复和真实业务场景、AI 赋能陪跑、Agent 工作系统相关的问题。
 
+也可以通过以下方式联系：
+
+- Email: 17610006129a@gmail.com
+- WeChat: mondoagentos
+
 ## 推荐目录结构
 
 ```text
