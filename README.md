@@ -120,6 +120,10 @@ AI 真正缺的通常不是 prompt，而是项目现场。
 - `第一位内测执行任务`：跟踪第一位真实用户初始化建模内测。
 - `第一轮内测反馈`：记录初始化建模内测结果。
 
+准备跑第一位用户时，可以直接创建：
+
+- [第一位内测执行任务](https://github.com/alsacer123/mondo-agent-os/issues/new?template=first-beta-run.md)
+
 Issue 和任务描述口径见：
 
 - `docs/github-task-guide.md`
