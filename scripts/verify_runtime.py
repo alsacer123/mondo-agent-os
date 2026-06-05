@@ -63,43 +63,15 @@ def main() -> int:
         assert context_file.exists()
         assert "Mondo Agent Context" in context_file.read_text(encoding="utf-8")
 
-        beta_pack_out = io.StringIO()
-        beta_pack_file = Path(tmp) / "first-beta-run-pack.md"
-        with contextlib.redirect_stdout(beta_pack_out):
-            cli_main(["beta-pack", "--output", str(beta_pack_file)])
-        assert beta_pack_file.exists()
-        assert "First Beta Run Pack" in beta_pack_file.read_text(encoding="utf-8")
-
-        beta_intake_out = io.StringIO()
-        beta_intake_file = Path(tmp) / "beta-user-intake.md"
-        with contextlib.redirect_stdout(beta_intake_out):
-            cli_main(["beta-intake", "--output", str(beta_intake_file)])
-        assert beta_intake_file.exists()
-        assert "第一位内测候选用户准入记录" in beta_intake_file.read_text(encoding="utf-8")
-
-        beta_outreach_out = io.StringIO()
-        beta_outreach_file = Path(tmp) / "beta-candidate-outreach.md"
-        with contextlib.redirect_stdout(beta_outreach_out):
-            cli_main(["beta-outreach", "--output", str(beta_outreach_file)])
-        assert beta_outreach_file.exists()
-        assert "第一位内测候选触达清单" in beta_outreach_file.read_text(encoding="utf-8")
-
-        beta_status_out = io.StringIO()
-        with contextlib.redirect_stdout(beta_status_out):
-            cli_main(["beta-status", "--root", str(ROOT), "--json"])
-        beta_status = json.loads(beta_status_out.getvalue())
-        assert beta_status["status"] in {"missing_artifacts", "ready_for_candidate_outreach"}
-        assert len(beta_status["artifacts"]) == 3
-
         from mondo_agent_os.workspace import append_markdown
 
         append_markdown(
             workspace,
             "40_Daily/_行动池.md",
-            "- [ ] 整理第一个内测用户反馈",
-            "内测输入",
+            "- [ ] 整理第一个真实项目输入",
+            "真实项目输入",
         )
-        assert "内测输入" in (workspace / "40_Daily" / "_行动池.md").read_text(encoding="utf-8")
+        assert "真实项目输入" in (workspace / "40_Daily" / "_行动池.md").read_text(encoding="utf-8")
 
     print("runtime smoke test passed")
     return 0

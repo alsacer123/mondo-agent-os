@@ -190,7 +190,7 @@ def write_project_intake_files(root: Path, draft: dict[str, Any]) -> list[str]:
     files = {
         project / "_项目规则.md": "# 项目规则\n\n- 先基于用户确认过的项目现场推进。\n- 不读取无关项目。\n- 写入前先说明写入位置和内容。\n",
         project / "_总览.md": f"# 项目总览\n\n## 初始项目口述\n\n{draft['project_intake']}\n",
-        project / "_当前状态.md": "# 当前状态\n\n## 初始化判断\n\n- 已完成第一轮项目口述采集，等待继续拆分具体项目文件。\n",
+        project / "_当前状态.md": "# 当前状态\n\n## 初始化判断\n\n- 已完成初始项目口述采集，等待继续拆分具体项目文件。\n",
         project / "_next.md": f"# 下一步\n\n## 当前下一步\n\n状态：待做\n\n动作：{draft['first_daily_action']}\n\n完成标志：用户确认主线项目和第一个可执行动作。\n\n## 已完成归档\n",
         project / "决策日志.md": "# 决策日志\n\n- 初始化阶段：先把用户口述收成一个项目现场，再逐步拆分到具体项目。\n",
     }

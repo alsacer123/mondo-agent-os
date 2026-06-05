@@ -2,7 +2,7 @@
 
 这份路线图只围绕一个长期目标推进：
 
-> 帮客户把混乱的工作变成一个 AI 能持续接手的工作现场。
+> 帮客户把混乱工作变成一个 AI 能持续接手的工作现场。
 
 Mondo Agent OS 不是独立聊天客户端，也不是完整 Agent Runtime。它要成为 Agent 生态里的工作系统底座：让 Cherry Studio、Codex、Claude Code、Cursor、Cline 或其他 Agent 能读懂用户的工作现场，并把状态、下一步、Daily 和决策持续写回。
 
@@ -16,9 +16,9 @@ Mondo Agent OS 不是独立聊天客户端，也不是完整 Agent Runtime。它
 - CLI / MCP / Agent Skill 适配。
 - 安全边界、诊断和验证脚本。
 
-暂不公开完整商业场景包。内容生产、工作推进、客户交付等角色包先作为内测和陪跑中的可复用经验沉淀，等真实用户足够多后再决定开放边界。
+完整商业场景包暂不放入公开底座。内容生产、工作推进、客户交付等角色包先作为内部方法沉淀，等真实使用场景足够稳定后再决定开放边界。
 
-## 阶段 0：底座可运行
+## 阶段 0：公开底座可运行
 
 目标：让一个干净工作区能被初始化、检查、路由、导出上下文，并能通过 MCP 被图形化 Agent 客户端调用。
 
@@ -28,31 +28,27 @@ Mondo Agent OS 不是独立聊天客户端，也不是完整 Agent Runtime。它
 - CLI 初始化、诊断、扫描、输入路由、实时状态和 Agent context。
 - MCP 工具入口。
 - onboarding 初始化建模流程。
-- 第一轮内测 checklist、邀请文案、主持人 runbook 和反馈表。
-- runtime、MCP、beta flow 验证脚本。
+- runtime、MCP、onboarding flow 验证脚本。
 
 通过标准：
 
 ```bash
 python scripts/verify_runtime.py
 python scripts/verify_mcp.py
-python scripts/verify_beta_flow.py
+python scripts/verify_onboarding_flow.py
 ```
 
-## 阶段 1：第一位真实用户内测
+## 阶段 1：真实工作初始化可用
 
 目标：验证普通用户能不能在不理解 MCP、API、CLI 或文件结构的情况下，把长期方向和当前项目录入成可流转的工作现场。
 
 执行顺序：
 
-1. 用 `docs/beta-invitation-message.md` 邀请第一位用户。
-2. 主持人按 `docs/beta-host-runbook.md` 引导用户口述。
-3. 用户先说长期方向，再说所有当前项目，而不是只输入一条待办。
-4. onboarding 生成初始化草案。
-5. 用户确认后，系统直接写入 `_Identity/`、行动池、当天 Daily 和初始化项目文件。
-6. 用 `docs/beta-feedback-form.md` 记录体验反馈。
-
-第一轮只验证用户结果，不追求自动化完整度。
+1. 用户在 Cherry Studio 或其他 Agent 客户端里请求建立个人 AI 工作系统。
+2. Agent 先引导用户讲长期方向，再讲所有当前项目，而不是只输入一条待办。
+3. onboarding 收集身份、项目、卡点、边界和本周主线。
+4. 用户确认后，系统直接写入 `_Identity/`、行动池、当天 Daily 和初始化项目文件。
+5. 第二天用户可以从早间整理继续，不需要重新解释全部背景。
 
 成功标准：
 
@@ -63,7 +59,7 @@ python scripts/verify_beta_flow.py
 
 ## 阶段 2：按真实反馈修底座
 
-目标：只修真实内测暴露的问题，不为了技术完整感扩张系统。
+目标：只修真实使用暴露的问题，不为了技术完整感扩张系统。
 
 优先修：
 
@@ -82,7 +78,7 @@ python scripts/verify_beta_flow.py
 - 自建复杂定时平台。
 - 把商业场景包全部开源。
 
-## 阶段 3：连续 3-5 位用户复测
+## 阶段 3：从多种真实场景抽象角色包
 
 目标：从不同真实用户里找共性，而不是围绕单个用户无限定制。
 
@@ -104,9 +100,8 @@ python scripts/verify_beta_flow.py
 阶段产物：
 
 - 更新 onboarding 问题。
-- 更新 beta checklist。
 - 抽象 2-3 个高频角色包。
-- 明确哪些能力适合开源，哪些应该保留为陪跑服务。
+- 明确哪些能力适合开源，哪些应保留为陪跑服务或私有模块。
 
 ## 阶段 4：沉淀角色包
 
@@ -122,7 +117,7 @@ python scripts/verify_beta_flow.py
 - 哪些事项必须进决策日志。
 - 哪些动作需要用户确认。
 
-第一批候选：
+第一批可探索方向：
 
 - 内容生产型个人品牌。
 - 职场工作推进型。
@@ -146,9 +141,9 @@ python scripts/verify_beta_flow.py
 
 原则：
 
-- 强 Agent 负责推理、对话和执行。
+- Agent 负责推理、对话和执行。
 - Mondo 负责工作现场、写回规则和状态连续性。
-- 适配器可以增加，底座不要变成臃肿主体。
+- 适配器可以增加，底座不要变成膨胀主体。
 
 ## 阶段 6：判断是否成熟
 
@@ -160,12 +155,10 @@ python scripts/verify_beta_flow.py
 - 晚间收口能更新项目状态和明天第一步。
 - Agent 换工具后仍能读懂同一套工作现场。
 - 项目文件不会泄露密钥、密码、服务器信息或无关资产。
-- 至少 3 个角色包经过真实用户验证。
+- 至少 3 个角色包经过真实使用验证。
 
 ## 当前唯一下一关
 
-完成第一位真实用户内测。
-
-在这之前，仓库继续优先服务这个问题：
+让公开底座稳定支持一次真实工作初始化：
 
 > 用户能不能从“我只是和 AI 聊天”，跨到“AI 开始接住我的工作现场”？
