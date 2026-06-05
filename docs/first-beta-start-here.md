@@ -31,6 +31,10 @@ python scripts/verify_beta_flow.py
 
 这只验证本地 onboarding 流程能跑通。它不能替代真实用户内测。
 
+完整配置自检见：
+
+- `docs/beta-config-preflight.md`
+
 ### 3. 现场开场
 
 主持人按：
@@ -71,6 +75,7 @@ python scripts/verify_beta_flow.py
 内测结束后立即记录：
 
 - `docs/beta-feedback-form.md`
+- `docs/beta-retro-guide.md`
 
 如果用户愿意公开反馈，也可以用 GitHub Issue 模板：
 

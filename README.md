@@ -256,6 +256,7 @@ mondo-os context --root <path>
 - `docs/execution-roadmap.md`
 - `docs/github-task-guide.md`
 - `docs/first-beta-start-here.md`
+- `docs/beta-config-preflight.md`
 - `docs/beta-test-checklist.md`
 - `docs/beta-feedback-form.md`
 - `docs/beta-retro-guide.md`
