@@ -35,6 +35,14 @@ python scripts/verify_beta_flow.py
 
 - `docs/beta-config-preflight.md`
 
+如果 GitHub Issue 创建、浏览器授权或网络状态不稳定，先生成一份本地执行包：
+
+```bash
+python scripts/prepare_first_beta_pack.py
+```
+
+生成的 `.mondo/first-beta-run-pack.md` 可以当场作为主持人执行清单。第一位用户内测不应该被 GitHub Issue 提交动作阻断，Issue 可以事后补建。
+
 ### 3. 现场开场
 
 主持人按：

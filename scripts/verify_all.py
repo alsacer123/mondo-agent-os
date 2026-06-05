@@ -14,6 +14,7 @@ CHECKS = [
     ("runtime", "verify_runtime.py"),
     ("mcp", "verify_mcp.py"),
     ("beta flow", "verify_beta_flow.py"),
+    ("first beta run pack", "verify_beta_pack.py"),
 ]
 
 

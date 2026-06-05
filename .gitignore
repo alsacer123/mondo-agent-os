@@ -14,6 +14,7 @@ cache/
 tmp/
 temp/
 logs/
+.mondo/
 
 # Python
 __pycache__/
