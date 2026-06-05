@@ -137,6 +137,12 @@ python scripts/prepare_first_beta_pack.py
 mondo-os beta-pack
 ```
 
+筛选第一位候选用户时，可以生成一份可填写的准入记录：
+
+```bash
+mondo-os beta-intake
+```
+
 Issue 和任务描述口径见：
 
 - `docs/github-task-guide.md`
@@ -329,6 +335,12 @@ python scripts/prepare_first_beta_pack.py
 
 ```bash
 mondo-os beta-pack
+```
+
+生成候选用户准入记录：
+
+```bash
+mondo-os beta-intake
 ```
 
 ```bash

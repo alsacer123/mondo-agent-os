@@ -54,6 +54,12 @@ python scripts/prepare_first_beta_pack.py
 mondo-os beta-pack
 ```
 
+如果要直接生成一份候选用户准入记录：
+
+```bash
+mondo-os beta-intake
+```
+
 生成的 `.mondo/first-beta-run-pack.md` 可以当场作为主持人执行清单。第一位用户内测不应该被 GitHub Issue 提交动作阻断，Issue 可以事后补建。
 
 ### 3. 现场开场

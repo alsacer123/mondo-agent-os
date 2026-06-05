@@ -70,6 +70,13 @@ def main() -> int:
         assert beta_pack_file.exists()
         assert "First Beta Run Pack" in beta_pack_file.read_text(encoding="utf-8")
 
+        beta_intake_out = io.StringIO()
+        beta_intake_file = Path(tmp) / "beta-user-intake.md"
+        with contextlib.redirect_stdout(beta_intake_out):
+            cli_main(["beta-intake", "--output", str(beta_intake_file)])
+        assert beta_intake_file.exists()
+        assert "第一位内测候选用户准入记录" in beta_intake_file.read_text(encoding="utf-8")
+
         from mondo_agent_os.workspace import append_markdown
 
         append_markdown(

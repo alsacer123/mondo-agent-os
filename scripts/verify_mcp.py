@@ -45,6 +45,7 @@ def main() -> int:
             assert "mondo_confirm_onboarding" in tool_names
             assert "mondo_append_markdown" in tool_names
             assert "mondo_prepare_beta_pack" in tool_names
+            assert "mondo_prepare_beta_intake" in tool_names
 
             started = send(
                 proc,
@@ -138,6 +139,21 @@ def main() -> int:
             )
             assert "mcp-beta-pack.md" in beta_pack["result"]["content"][0]["text"]
             assert (Path(tmp) / "mcp-beta-pack.md").exists()
+
+            beta_intake = send(
+                proc,
+                {
+                    "jsonrpc": "2.0",
+                    "id": 9,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "mondo_prepare_beta_intake",
+                        "arguments": {"output": str(Path(tmp) / "mcp-beta-intake.md")},
+                    },
+                },
+            )
+            assert "mcp-beta-intake.md" in beta_intake["result"]["content"][0]["text"]
+            assert (Path(tmp) / "mcp-beta-intake.md").exists()
         finally:
             proc.kill()
 
