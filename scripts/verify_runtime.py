@@ -84,6 +84,13 @@ def main() -> int:
         assert beta_outreach_file.exists()
         assert "第一位内测候选触达清单" in beta_outreach_file.read_text(encoding="utf-8")
 
+        beta_status_out = io.StringIO()
+        with contextlib.redirect_stdout(beta_status_out):
+            cli_main(["beta-status", "--root", str(ROOT), "--json"])
+        beta_status = json.loads(beta_status_out.getvalue())
+        assert beta_status["status"] in {"missing_artifacts", "ready_for_candidate_outreach"}
+        assert len(beta_status["artifacts"]) == 3
+
         from mondo_agent_os.workspace import append_markdown
 
         append_markdown(

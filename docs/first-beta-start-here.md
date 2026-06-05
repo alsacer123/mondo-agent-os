@@ -65,6 +65,12 @@ mondo-os beta-outreach
 mondo-os beta-intake
 ```
 
+如果要检查本地执行包、触达清单和准入记录是否都已经生成：
+
+```bash
+mondo-os beta-status
+```
+
 生成的 `.mondo/first-beta-run-pack.md` 可以当场作为主持人执行清单。第一位用户内测不应该被 GitHub Issue 提交动作阻断，Issue 可以事后补建。
 
 ### 3. 现场开场

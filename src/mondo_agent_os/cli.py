@@ -9,6 +9,7 @@ from pathlib import Path
 from .beta_intake import write_beta_user_intake
 from .beta_outreach import write_beta_candidate_outreach
 from .beta_pack import write_first_beta_pack
+from .beta_status import get_beta_status
 from .spec import ROLE_PACKS
 from .workspace import (
     doctor_workspace,
@@ -59,6 +60,10 @@ def build_parser() -> argparse.ArgumentParser:
 
     beta_outreach = sub.add_parser("beta-outreach", help="Prepare a first beta candidate outreach checklist")
     beta_outreach.add_argument("--output", default=".mondo/beta-candidate-outreach.md")
+
+    beta_status = sub.add_parser("beta-status", help="Show first beta preparation status and next action")
+    beta_status.add_argument("--root", default=".")
+    beta_status.add_argument("--json", action="store_true")
 
     return parser
 
@@ -141,6 +146,19 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "beta-outreach":
         output = write_beta_candidate_outreach(Path(args.output))
         print(f"beta candidate outreach written: {output}")
+        return 0
+
+    if args.command == "beta-status":
+        status = get_beta_status(Path(args.root).resolve())
+        if args.json:
+            print(to_json(status))
+        else:
+            print(f"status: {status['status']}")
+            print(f"next_action: {status['next_action']}")
+            print("artifacts:")
+            for artifact in status["artifacts"]:
+                mark = "ok" if artifact["exists"] else "missing"
+                print(f"- {mark}: {artifact['path']}")
         return 0
 
     parser.error("unknown command")

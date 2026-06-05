@@ -147,6 +147,12 @@ mondo-os beta-outreach
 mondo-os beta-intake
 ```
 
+查看第一位内测材料是否已经准备好：
+
+```bash
+mondo-os beta-status
+```
+
 Issue 和任务描述口径见：
 
 - `docs/github-task-guide.md`
@@ -351,6 +357,10 @@ mondo-os beta-outreach
 
 ```bash
 mondo-os beta-intake
+```
+
+```bash
+mondo-os beta-status
 ```
 
 ```bash
