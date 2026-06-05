@@ -8,6 +8,13 @@ from pathlib import Path
 from typing import Any
 
 from .spec import ROLE_PACKS
+from .onboarding import (
+    collect_identity,
+    collect_projects,
+    confirm_onboarding,
+    onboarding_status,
+    start_onboarding,
+)
 from .workspace import (
     append_markdown,
     doctor_workspace,
@@ -32,6 +39,57 @@ TOOLS: list[dict[str, Any]] = [
                 "project": {"type": "string", "default": "示例AI赋能项目"},
                 "force": {"type": "boolean", "default": False},
             },
+            "required": ["root"],
+        },
+    },
+    {
+        "name": "mondo_start_onboarding",
+        "description": "Start a guided onboarding flow before using Daily/project routing. This is the default first step for a new user.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {"root": {"type": "string"}},
+            "required": ["root"],
+        },
+    },
+    {
+        "name": "mondo_collect_identity",
+        "description": "Capture the user's long-term direction, positioning, friction, and AI boundaries during onboarding.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "root": {"type": "string"},
+                "notes": {"type": "string"},
+            },
+            "required": ["root", "notes"],
+        },
+    },
+    {
+        "name": "mondo_collect_projects",
+        "description": "Capture the user's active, waiting, and paused projects during onboarding and produce a draft.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "root": {"type": "string"},
+                "notes": {"type": "string"},
+            },
+            "required": ["root", "notes"],
+        },
+    },
+    {
+        "name": "mondo_onboarding_status",
+        "description": "Return onboarding phase, next questions, and draft if available.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {"root": {"type": "string"}},
+            "required": ["root"],
+        },
+    },
+    {
+        "name": "mondo_confirm_onboarding",
+        "description": "After user review, write the initial identity, project, action pool, and Daily files.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {"root": {"type": "string"}},
             "required": ["root"],
         },
     },
@@ -115,6 +173,16 @@ def call_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
             bool(arguments.get("force", False)),
         )
         return text_result({"results": result})
+    if name == "mondo_start_onboarding":
+        return text_result(start_onboarding(Path(arguments["root"])))
+    if name == "mondo_collect_identity":
+        return text_result(collect_identity(Path(arguments["root"]), arguments["notes"]))
+    if name == "mondo_collect_projects":
+        return text_result(collect_projects(Path(arguments["root"]), arguments["notes"]))
+    if name == "mondo_onboarding_status":
+        return text_result(onboarding_status(Path(arguments["root"])))
+    if name == "mondo_confirm_onboarding":
+        return text_result(confirm_onboarding(Path(arguments["root"])))
     if name == "mondo_doctor":
         return text_result(doctor_workspace(Path(arguments["root"])))
     if name == "mondo_scan":

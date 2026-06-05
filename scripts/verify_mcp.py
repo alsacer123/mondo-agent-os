@@ -41,27 +41,79 @@ def main() -> int:
             tools = send(proc, {"jsonrpc": "2.0", "id": 2, "method": "tools/list", "params": {}})
             tool_names = {tool["name"] for tool in tools["result"]["tools"]}
             assert "mondo_init_workspace" in tool_names
+            assert "mondo_start_onboarding" in tool_names
+            assert "mondo_confirm_onboarding" in tool_names
             assert "mondo_append_markdown" in tool_names
 
-            created = send(
+            started = send(
                 proc,
                 {
                     "jsonrpc": "2.0",
                     "id": 3,
                     "method": "tools/call",
                     "params": {
-                        "name": "mondo_init_workspace",
-                        "arguments": {"root": str(workspace), "project": "内测项目"},
+                        "name": "mondo_start_onboarding",
+                        "arguments": {"root": str(workspace)},
                     },
                 },
             )
-            assert "results" in created["result"]["content"][0]["text"]
+            assert "collecting_identity" in started["result"]["content"][0]["text"]
+
+            identity = send(
+                proc,
+                {
+                    "jsonrpc": "2.0",
+                    "id": 4,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "mondo_collect_identity",
+                        "arguments": {
+                            "root": str(workspace),
+                            "notes": "我想用 AI 把个人工作变成可持续推进的系统，当前不想每次都重新解释背景。",
+                        },
+                    },
+                },
+            )
+            assert "collecting_projects" in identity["result"]["content"][0]["text"]
+
+            projects = send(
+                proc,
+                {
+                    "jsonrpc": "2.0",
+                    "id": 5,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "mondo_collect_projects",
+                        "arguments": {
+                            "root": str(workspace),
+                            "notes": "我现在有两个项目：个人品牌内容系统和客户交付。个人品牌要继续写下一篇长文，客户交付要下周给方案。",
+                        },
+                    },
+                },
+            )
+            assert "draft_ready" in projects["result"]["content"][0]["text"]
+
+            confirmed = send(
+                proc,
+                {
+                    "jsonrpc": "2.0",
+                    "id": 6,
+                    "method": "tools/call",
+                    "params": {
+                        "name": "mondo_confirm_onboarding",
+                        "arguments": {"root": str(workspace)},
+                    },
+                },
+            )
+            assert "active_daily_flow" in confirmed["result"]["content"][0]["text"]
+            assert (workspace / "_Identity" / "长期方向.md").exists()
+            assert (workspace / "40_Daily" / "_行动池.md").exists()
 
             context = send(
                 proc,
                 {
                     "jsonrpc": "2.0",
-                    "id": 4,
+                    "id": 7,
                     "method": "tools/call",
                     "params": {
                         "name": "mondo_export_context",
@@ -70,25 +122,6 @@ def main() -> int:
                 },
             )
             assert "agent-context.md" in context["result"]["content"][0]["text"]
-
-            append = send(
-                proc,
-                {
-                    "jsonrpc": "2.0",
-                    "id": 5,
-                    "method": "tools/call",
-                    "params": {
-                        "name": "mondo_append_markdown",
-                        "arguments": {
-                            "root": str(workspace),
-                            "relative_path": "40_Daily/_行动池.md",
-                            "heading": "内测输入",
-                            "content": "- [ ] 整理第一个内测用户反馈",
-                        },
-                    },
-                },
-            )
-            assert "_行动池.md" in append["result"]["content"][0]["text"]
         finally:
             proc.kill()
 
