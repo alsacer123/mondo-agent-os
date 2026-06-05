@@ -227,6 +227,7 @@ mondo-os context --root <path>
 详见：
 
 - `docs/customer-outcome.md`
+- `docs/beta-test-checklist.md`
 - `docs/methodology.md`
 - `docs/personal-ai-enablement.md`
 - `docs/security.md`
