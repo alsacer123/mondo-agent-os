@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from .beta_intake import write_beta_user_intake
+from .beta_outreach import write_beta_candidate_outreach
 from .beta_pack import write_first_beta_pack
 from .spec import ROLE_PACKS
 from .onboarding import (
@@ -167,6 +168,19 @@ TOOLS: list[dict[str, Any]] = [
         },
     },
     {
+        "name": "mondo_prepare_beta_outreach",
+        "description": "Write a first beta candidate outreach checklist for listing three candidates and sending the light outreach message.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "output": {
+                    "type": "string",
+                    "default": ".mondo/beta-candidate-outreach.md",
+                }
+            },
+        },
+    },
+    {
         "name": "mondo_append_markdown",
         "description": "Append confirmed content to one Markdown file inside the workspace. Ask the user before using it.",
         "inputSchema": {
@@ -230,6 +244,10 @@ def call_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
     if name == "mondo_prepare_beta_intake":
         output = arguments.get("output") or ".mondo/beta-user-intake.md"
         path = write_beta_user_intake(Path(output))
+        return text_result({"path": str(path)})
+    if name == "mondo_prepare_beta_outreach":
+        output = arguments.get("output") or ".mondo/beta-candidate-outreach.md"
+        path = write_beta_candidate_outreach(Path(output))
         return text_result({"path": str(path)})
     if name == "mondo_append_markdown":
         path = append_markdown(

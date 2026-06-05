@@ -7,6 +7,7 @@ import time
 from pathlib import Path
 
 from .beta_intake import write_beta_user_intake
+from .beta_outreach import write_beta_candidate_outreach
 from .beta_pack import write_first_beta_pack
 from .spec import ROLE_PACKS
 from .workspace import (
@@ -55,6 +56,9 @@ def build_parser() -> argparse.ArgumentParser:
 
     beta_intake = sub.add_parser("beta-intake", help="Prepare a first beta candidate intake record")
     beta_intake.add_argument("--output", default=".mondo/beta-user-intake.md")
+
+    beta_outreach = sub.add_parser("beta-outreach", help="Prepare a first beta candidate outreach checklist")
+    beta_outreach.add_argument("--output", default=".mondo/beta-candidate-outreach.md")
 
     return parser
 
@@ -132,6 +136,11 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "beta-intake":
         output = write_beta_user_intake(Path(args.output))
         print(f"beta user intake written: {output}")
+        return 0
+
+    if args.command == "beta-outreach":
+        output = write_beta_candidate_outreach(Path(args.output))
+        print(f"beta candidate outreach written: {output}")
         return 0
 
     parser.error("unknown command")

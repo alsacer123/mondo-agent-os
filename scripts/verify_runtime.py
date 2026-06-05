@@ -77,6 +77,13 @@ def main() -> int:
         assert beta_intake_file.exists()
         assert "第一位内测候选用户准入记录" in beta_intake_file.read_text(encoding="utf-8")
 
+        beta_outreach_out = io.StringIO()
+        beta_outreach_file = Path(tmp) / "beta-candidate-outreach.md"
+        with contextlib.redirect_stdout(beta_outreach_out):
+            cli_main(["beta-outreach", "--output", str(beta_outreach_file)])
+        assert beta_outreach_file.exists()
+        assert "第一位内测候选触达清单" in beta_outreach_file.read_text(encoding="utf-8")
+
         from mondo_agent_os.workspace import append_markdown
 
         append_markdown(

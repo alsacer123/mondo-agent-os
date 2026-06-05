@@ -137,7 +137,11 @@ python scripts/prepare_first_beta_pack.py
 mondo-os beta-pack
 ```
 
-筛选第一位候选用户时，可以生成一份可填写的准入记录：
+筛选第一位候选用户时，可以先生成触达清单，再生成一份可填写的准入记录：
+
+```bash
+mondo-os beta-outreach
+```
 
 ```bash
 mondo-os beta-intake
@@ -339,7 +343,11 @@ python scripts/prepare_first_beta_pack.py
 mondo-os beta-pack
 ```
 
-生成候选用户准入记录：
+生成候选用户触达清单和准入记录：
+
+```bash
+mondo-os beta-outreach
+```
 
 ```bash
 mondo-os beta-intake

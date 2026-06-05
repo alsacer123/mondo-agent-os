@@ -55,7 +55,11 @@ python scripts/prepare_first_beta_pack.py
 mondo-os beta-pack
 ```
 
-如果要直接生成一份候选用户准入记录：
+如果要直接生成候选用户触达清单和准入记录：
+
+```bash
+mondo-os beta-outreach
+```
 
 ```bash
 mondo-os beta-intake
