@@ -139,6 +139,7 @@ Issue 和任务描述口径见：
 选择第一位内测用户前，先看：
 
 - `docs/beta-user-selection.md`
+- `docs/beta-user-intake-template.md`
 
 也可以通过以下方式联系：
 
@@ -274,6 +275,7 @@ mondo-os context --root <path>
 - `docs/github-task-guide.md`
 - `docs/first-beta-start-here.md`
 - `docs/beta-user-selection.md`
+- `docs/beta-user-intake-template.md`
 - `docs/beta-config-preflight.md`
 - `docs/beta-session-notes-template.md`
 - `docs/beta-test-checklist.md`

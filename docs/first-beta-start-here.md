@@ -13,6 +13,7 @@
 邀请前先判断用户是否适合第一轮内测：
 
 - `docs/beta-user-selection.md`
+- `docs/beta-user-intake-template.md`
 
 第一位用户要有真实项目现场，并且愿意把混乱工作口述出来。不要为了测试顺利而选择一个没有真实工作压力的人。
 
