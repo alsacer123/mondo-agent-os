@@ -131,6 +131,11 @@ python scripts/prepare_first_beta_pack.py
 ```
 
 然后用 `.mondo/first-beta-run-pack.md` 按一次完整现场内测执行。第一位用户内测不应该被 Issue 提交动作阻断，Issue 可以内测后再补建。
+安装后也可以运行：
+
+```bash
+mondo-os beta-pack
+```
 
 Issue 和任务描述口径见：
 
@@ -320,6 +325,11 @@ python scripts/prepare_first_beta_pack.py
 ```
 
 它会生成 `.mondo/first-beta-run-pack.md`，包含 Issue 模板、邀请话术、用户第一天说明、配置自检、主持人 runbook、现场记录、反馈和复盘入口。
+安装后同样可以运行：
+
+```bash
+mondo-os beta-pack
+```
 
 ```bash
 python scripts/verify_runtime.py

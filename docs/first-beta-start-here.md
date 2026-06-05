@@ -48,6 +48,12 @@ python scripts/verify_beta_flow.py
 python scripts/prepare_first_beta_pack.py
 ```
 
+安装后也可以运行：
+
+```bash
+mondo-os beta-pack
+```
+
 生成的 `.mondo/first-beta-run-pack.md` 可以当场作为主持人执行清单。第一位用户内测不应该被 GitHub Issue 提交动作阻断，Issue 可以事后补建。
 
 ### 3. 现场开场

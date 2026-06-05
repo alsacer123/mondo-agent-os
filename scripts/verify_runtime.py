@@ -63,6 +63,13 @@ def main() -> int:
         assert context_file.exists()
         assert "Mondo Agent Context" in context_file.read_text(encoding="utf-8")
 
+        beta_pack_out = io.StringIO()
+        beta_pack_file = Path(tmp) / "first-beta-run-pack.md"
+        with contextlib.redirect_stdout(beta_pack_out):
+            cli_main(["beta-pack", "--output", str(beta_pack_file)])
+        assert beta_pack_file.exists()
+        assert "First Beta Run Pack" in beta_pack_file.read_text(encoding="utf-8")
+
         from mondo_agent_os.workspace import append_markdown
 
         append_markdown(
