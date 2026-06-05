@@ -74,6 +74,7 @@ python scripts/verify_beta_flow.py
 
 内测结束后立即记录：
 
+- `docs/beta-session-notes-template.md`
 - `docs/beta-feedback-form.md`
 - `docs/beta-retro-guide.md`
 
