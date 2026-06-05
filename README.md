@@ -262,3 +262,9 @@ python scripts/verify_mcp.py
 ```
 
 验证 MCP stdio server 能初始化、列出工具、导出上下文并追加 Markdown。
+
+```bash
+python scripts/verify_beta_flow.py
+```
+
+按第一轮内测 checklist 跑一段模拟用户口述，验证 onboarding 能生成长期方向、行动池、当天 Daily、初始化项目五件套和 Agent context。
