@@ -15,6 +15,7 @@
 - 把一句口述输入初步分流到 Daily、行动池、项目、沉淀区或 Inbox。
 - 生成 `.mondo/live-state.json`，让系统状态尽快更新。
 - 生成 `.mondo/agent-context.md`，让普通对话 Agent 读到最新工作现场。
+- 生成第一位内测执行包，让主持人不用打开命令行也能准备候选用户准入、邀请、配置自检、现场记录、反馈和复盘材料。
 - 在用户确认后，向工作区内的 Markdown 文件追加内容。
 
 ## 推荐配置
@@ -65,11 +66,12 @@
 4. 生成草稿后，先让用户确认长期方向、项目归属、主线项目和第一步动作。
 5. 用户确认后，才调用 mondo_confirm_onboarding 写入工作区。
 6. 进入 active_daily_flow 后，再使用 mondo_scan、mondo_export_context、mondo_route_input 和 mondo_append_markdown 做日常流转。
-7. 需要写入文件前，先用自然语言说明将写入哪个文件、写入什么内容，并等待用户确认。
-8. 用户确认后，才调用 mondo_append_markdown 写入。
-9. 不写入密钥、token、密码、私钥、服务器 IP、客户隐私或完整登录命令。
-10. Daily 只放今天要执行的动作；跨天动作放行动池；项目进展写回项目文件；重大转向写决策日志。
-11. 不要试图替用户一次性整理完整个知识库，每次只推进一个清晰动作。
+7. 准备第一位真实用户内测时，可以调用 mondo_prepare_beta_pack 生成本地执行包，再按 `docs/beta-user-selection.md` 和 `docs/beta-user-intake-template.md` 先筛选候选用户。
+8. 需要写入文件前，先用自然语言说明将写入哪个文件、写入什么内容，并等待用户确认。
+9. 用户确认后，才调用 mondo_append_markdown 写入。
+10. 不写入密钥、token、密码、私钥、服务器 IP、客户隐私或完整登录命令。
+11. Daily 只放今天要执行的动作；跨天动作放行动池；项目进展写回项目文件；重大转向写决策日志。
+12. 不要试图替用户一次性整理完整个知识库，每次只推进一个清晰动作。
 ```
 
 ## 内测用户第一步

@@ -7,6 +7,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
+from .beta_pack import write_first_beta_pack
 from .spec import ROLE_PACKS
 from .onboarding import (
     collect_identity,
@@ -139,6 +140,19 @@ TOOLS: list[dict[str, Any]] = [
         },
     },
     {
+        "name": "mondo_prepare_beta_pack",
+        "description": "Write a local first beta run pack so a GUI client can host the first real user test without command line steps.",
+        "inputSchema": {
+            "type": "object",
+            "properties": {
+                "output": {
+                    "type": "string",
+                    "default": ".mondo/first-beta-run-pack.md",
+                }
+            },
+        },
+    },
+    {
         "name": "mondo_append_markdown",
         "description": "Append confirmed content to one Markdown file inside the workspace. Ask the user before using it.",
         "inputSchema": {
@@ -194,6 +208,10 @@ def call_tool(name: str, arguments: dict[str, Any]) -> dict[str, Any]:
         return text_result({"path": str(path)})
     if name == "mondo_export_context":
         path = export_agent_context(Path(arguments["root"]))
+        return text_result({"path": str(path)})
+    if name == "mondo_prepare_beta_pack":
+        output = arguments.get("output") or ".mondo/first-beta-run-pack.md"
+        path = write_first_beta_pack(Path(output))
         return text_result({"path": str(path)})
     if name == "mondo_append_markdown":
         path = append_markdown(
