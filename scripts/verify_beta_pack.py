@@ -16,6 +16,7 @@ REQUIRED_MARKERS = [
     "Beta candidate outreach",
     "Beta user selection",
     "Beta user intake template",
+    "mondo-os beta-status",
     "Invitation message",
     "User first day guide",
     "Configuration preflight",
