@@ -12,6 +12,7 @@
 
 邀请前先判断用户是否适合第一轮内测：
 
+- `docs/beta-candidate-outreach.md`
 - `docs/beta-user-selection.md`
 - `docs/beta-user-intake-template.md`
 
