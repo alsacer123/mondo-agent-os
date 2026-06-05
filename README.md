@@ -1,6 +1,6 @@
 # Mondo Agent OS｜蒙多 AI 工作系统
 
-一个给个人和小团队使用的 AI 工作系统模板，也是一个可以被 Agent 读取和初始化的运行系统。
+一个给个人和小团队使用的 AI 工作系统底座，也是一个可以被 Agent 读取、初始化、诊断和扩展的轻量 Runtime。
 
 它不是笔记美化模板，也不是工具教程。它解决的是一个更具体的问题：
 
@@ -18,6 +18,13 @@
 - 明天怎么接着推进。
 
 Mondo Agent OS 把这些信息变成一套固定的工作现场。你不需要先学复杂工具，也不需要等完整自动化系统搭好，只要先让 AI 读得到项目规则、当前状态和唯一下一步，它就能开始稳定参与真实工作。
+
+当前版本包含四层：
+
+- Markdown OS：项目规则、当前状态、唯一下一步、决策日志、Daily、行动池。
+- CLI Runtime：初始化、扫描、诊断、 loose input 路由和角色包列表。
+- Agent Skill：让 Codex/Claude 这类 Agent 能按同一套规则生成和维护工作区。
+- Role Packs：按角色加载不同工作协议，当前先内置内容生产型个人品牌和工作推进型雏形。
 
 ## 适合谁
 
@@ -107,11 +114,76 @@ your-vault/
 
 ## 快速开始
 
+### 方式一：使用 CLI 初始化
+
+```bash
+pip install -e .
+mondo-os init --root ./my-work-os --project 第一个AI赋能项目
+mondo-os doctor --root ./my-work-os
+mondo-os scan --root ./my-work-os
+mondo-os route "今天把客户项目的下一步写回"
+mondo-os packs
+mondo-os live --root ./my-work-os
+mondo-os context --root ./my-work-os
+```
+
+### 方式二：手动复制模板
+
 1. 复制 `templates/` 里的文件到你的 Obsidian vault 或普通文件夹。
 2. 先写 `_索引.md`，告诉 AI 你的全局规则和读取入口。
 3. 给每个项目复制一套项目文件。
 4. 每次让 AI 进入项目时，先让它读取 `_项目规则.md` 和 `_next.md`。
 5. 完成动作后，让 AI 把结果写回 `_next.md`、`_当前状态.md` 或 `决策日志.md`。
+
+## Runtime 能力
+
+```bash
+mondo-os init --root <path> --project <name>
+```
+
+初始化一个最小工作系统，包括全局索引、AGENTS.md、Daily、行动池、Insights、Inbox 和第一个项目的五个运行文件。
+
+```bash
+mondo-os doctor --root <path>
+```
+
+检查工作区是否具备可运行结构：根入口是否缺失、项目运行文件是否缺失、Markdown/JSON/YAML 中是否出现疑似 secret。
+
+```bash
+mondo-os scan --root <path>
+```
+
+输出工作区结构图，供 Agent 或外部自动化读取。
+
+```bash
+mondo-os route "一段口述输入"
+```
+
+把一句 loose input 初步路由到 Daily、行动池、项目、Insights 或 Inbox。它不是最终判断，只是中控 Agent 的第一层分流器。
+
+```bash
+mondo-os packs
+```
+
+列出可用角色包。角色包不是固定模板，而是一组工作类型、建议文件和 Agent 运行协议。
+
+```bash
+mondo-os live --root <path>
+```
+
+生成 `.mondo/live-state.json`。Daily、行动池、项目下一步和项目状态会汇总成一个实时状态文件，方便普通 Agent、轻量 Dashboard 或外部自动化读取。
+
+```bash
+mondo-os live --root <path> --watch --interval 30
+```
+
+持续刷新实时状态。用户不需要等到晚上复盘才看到系统变化，今天的任务、行动池和项目下一步一改，状态层就能跟着更新。
+
+```bash
+mondo-os context --root <path>
+```
+
+生成 `.mondo/agent-context.md`。这是给普通对话 Agent 看的简化入口：它不用理解完整技术架构，也能知道先读什么、今天发生了什么、哪些项目有下一步。
 
 ## 这个模板不做什么
 
@@ -128,6 +200,7 @@ your-vault/
 - `docs/personal-ai-enablement.md`
 - `docs/security.md`
 - `docs/setup-guide.md`
+- `docs/technical-architecture.md`
 
 ## Agent Skill
 
@@ -142,3 +215,11 @@ your-vault/
 ```bash
 python skill/scripts/init_work_os.py --root ./my-work-os --project 第一个AI赋能项目
 ```
+
+## 开发验证
+
+```bash
+python scripts/verify_runtime.py
+```
+
+验证内容包括：初始化工作区、结构诊断、扫描输出、输入路由、角色包读取、实时状态生成和普通 Agent 上下文导出。

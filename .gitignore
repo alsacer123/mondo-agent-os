@@ -15,6 +15,12 @@ tmp/
 temp/
 logs/
 
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
 # Obsidian local files
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
@@ -23,4 +29,3 @@ logs/
 # System files
 Thumbs.db
 .DS_Store
-

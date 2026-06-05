@@ -1,0 +1,16 @@
+[project]
+name = "mondo-agent-os"
+version = "0.1.0"
+description = "A personal AI work OS runtime for project state, daily actions, agent rules, and role packs."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+mondo-os = "mondo_agent_os.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
