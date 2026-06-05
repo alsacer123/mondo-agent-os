@@ -103,6 +103,10 @@ AI 真正缺的通常不是 prompt，而是项目现场。
 - `真实工作场景接入`：描述你希望 AI 接住的工作现场。
 - `第一轮内测反馈`：记录初始化建模内测结果。
 
+Issue 和任务描述口径见：
+
+- `docs/github-task-guide.md`
+
 也可以通过以下方式联系：
 
 - Email: 17610006129a@gmail.com
@@ -233,6 +237,7 @@ mondo-os context --root <path>
 
 - `docs/customer-outcome.md`
 - `docs/execution-roadmap.md`
+- `docs/github-task-guide.md`
 - `docs/beta-test-checklist.md`
 - `docs/beta-feedback-form.md`
 - `docs/beta-invitation-message.md`
