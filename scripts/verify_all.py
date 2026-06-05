@@ -19,17 +19,17 @@ CHECKS = [
 
 def main() -> int:
     for label, script_name in CHECKS:
-        print(f"== {label} ==")
+        print(f"== {label} ==", flush=True)
         result = subprocess.run(
             [sys.executable, str(ROOT / "scripts" / script_name)],
             cwd=ROOT,
             check=False,
         )
         if result.returncode != 0:
-            print(f"{label} verification failed")
+            print(f"{label} verification failed", flush=True)
             return result.returncode
 
-    print("all verifications passed")
+    print("all verifications passed", flush=True)
     return 0
 
 
