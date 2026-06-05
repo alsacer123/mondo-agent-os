@@ -29,18 +29,18 @@ git status --short --branch
 在仓库根目录运行：
 
 ```bash
-python scripts/verify_runtime.py
-python scripts/verify_mcp.py
-python scripts/verify_beta_flow.py
+python scripts/verify_all.py
 ```
 
 预期：
 
+- documentation reference verification passed
 - runtime smoke test passed
 - mcp smoke test passed
 - beta flow verification passed
+- all verifications passed
 
-如果 `verify_beta_flow.py` 失败，不要开始内测。第一轮要先保证初始化建模能跑通。
+如果 `verify_all.py` 失败，不要开始内测。第一轮要先保证文档入口、runtime、MCP 和初始化建模都能跑通。
 
 ## 3. Cherry Studio MCP 配置
 
