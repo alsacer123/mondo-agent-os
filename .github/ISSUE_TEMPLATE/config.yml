@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 第一位内测启动包
+    url: https://github.com/alsacer123/mondo-agent-os/blob/main/docs/first-beta-start-here.md
+    about: 第一次真实用户内测前，先按这份启动包确认邀请、自检、主持、记录和复盘顺序。
+  - name: 用户第一天使用说明
+    url: https://github.com/alsacer123/mondo-agent-os/blob/main/docs/user-first-day-guide.md
+    about: 给第一次使用 Mondo Agent OS 的普通用户看，不需要先理解技术架构。
+  - name: GitHub 任务说明
+    url: https://github.com/alsacer123/mondo-agent-os/blob/main/docs/github-task-guide.md
+    about: 提交 Issue 前先看这里，确保任务围绕真实客户结果，而不是功能愿望清单。
