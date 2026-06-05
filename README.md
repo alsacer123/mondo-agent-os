@@ -302,3 +302,9 @@ python scripts/verify_beta_flow.py
 ```
 
 按第一轮内测 checklist 跑一段模拟用户口述，验证 onboarding 能生成长期方向、行动池、当天 Daily、初始化项目五件套和 Agent context。
+
+```bash
+python scripts/verify_docs.py
+```
+
+检查 README、docs 和 GitHub Issue 模板里引用的本地文档、脚本和模板路径是否存在，避免内测入口断链。
