@@ -234,6 +234,8 @@ mondo-os context --root <path>
 - `docs/customer-outcome.md`
 - `docs/beta-test-checklist.md`
 - `docs/beta-feedback-form.md`
+- `docs/beta-invitation-message.md`
+- `docs/beta-host-runbook.md`
 - `docs/methodology.md`
 - `docs/personal-ai-enablement.md`
 - `docs/security.md`
