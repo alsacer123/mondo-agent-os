@@ -8,6 +8,7 @@ dependencies = []
 
 [project.scripts]
 mondo-os = "mondo_agent_os.cli:main"
+mondo-mcp = "mondo_agent_os.mcp:main"
 
 [tool.setuptools]
 package-dir = {"" = "src"}

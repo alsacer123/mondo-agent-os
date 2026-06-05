@@ -36,6 +36,19 @@ def write_if_missing(path: Path, content: str, force: bool = False) -> str:
     return "written"
 
 
+def ensure_inside_root(root: Path, target: Path) -> Path:
+    root = root.expanduser().resolve()
+    target = target.expanduser().resolve()
+    if root == target or root in target.parents:
+        return target
+    raise ValueError(f"Target path is outside workspace: {target}")
+
+
+def contains_secret_like_text(text: str) -> bool:
+    lowered = text.lower()
+    return any(pattern.lower() in lowered for pattern in SECRET_PATTERNS)
+
+
 def init_workspace(root: Path, project: str, force: bool = False) -> list[str]:
     root = root.expanduser().resolve()
     today = date.today().isoformat()
@@ -167,6 +180,28 @@ def export_agent_context(root: Path) -> Path:
 
     output.write_text("\n".join(lines), encoding="utf-8")
     return output
+
+
+def append_markdown(root: Path, relative_path: str, content: str, heading: str | None = None) -> Path:
+    root = root.expanduser().resolve()
+    if contains_secret_like_text(content):
+        raise ValueError("Refusing to write content that looks like a secret.")
+
+    rel = Path(relative_path)
+    if rel.is_absolute() or ".." in rel.parts:
+        raise ValueError("relative_path must stay inside the workspace.")
+    if rel.suffix.lower() != ".md":
+        raise ValueError("Only Markdown files can be appended by this tool.")
+
+    target = ensure_inside_root(root, root / rel)
+    target.parent.mkdir(parents=True, exist_ok=True)
+    existing = target.read_text(encoding="utf-8") if target.exists() else ""
+
+    prefix = "\n\n"
+    if heading:
+        prefix += f"## {heading}\n\n"
+    target.write_text(existing + prefix + content.strip() + "\n", encoding="utf-8")
+    return target
 
 
 def extract_preview(path: Path, max_lines: int = 12) -> str:

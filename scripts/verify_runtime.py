@@ -63,6 +63,16 @@ def main() -> int:
         assert context_file.exists()
         assert "Mondo Agent Context" in context_file.read_text(encoding="utf-8")
 
+        from mondo_agent_os.workspace import append_markdown
+
+        append_markdown(
+            workspace,
+            "40_Daily/_行动池.md",
+            "- [ ] 整理第一个内测用户反馈",
+            "内测输入",
+        )
+        assert "内测输入" in (workspace / "40_Daily" / "_行动池.md").read_text(encoding="utf-8")
+
     print("runtime smoke test passed")
     return 0
 
