@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_MARKERS = [
     "# First Beta Run Pack",
     "GitHub issue template",
+    "Beta user selection",
     "Invitation message",
     "User first day guide",
     "Configuration preflight",

@@ -136,6 +136,10 @@ Issue 和任务描述口径见：
 
 - `docs/github-task-guide.md`
 
+选择第一位内测用户前，先看：
+
+- `docs/beta-user-selection.md`
+
 也可以通过以下方式联系：
 
 - Email: 17610006129a@gmail.com
@@ -269,6 +273,7 @@ mondo-os context --root <path>
 - `docs/execution-roadmap.md`
 - `docs/github-task-guide.md`
 - `docs/first-beta-start-here.md`
+- `docs/beta-user-selection.md`
 - `docs/beta-config-preflight.md`
 - `docs/beta-session-notes-template.md`
 - `docs/beta-test-checklist.md`

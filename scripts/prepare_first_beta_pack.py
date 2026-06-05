@@ -14,6 +14,7 @@ ISSUE_URL = "https://github.com/alsacer123/mondo-agent-os/issues/new?template=fi
 
 PACK_SOURCES = [
     ("GitHub issue template", ROOT / ".github" / "ISSUE_TEMPLATE" / "first-beta-run.md"),
+    ("Beta user selection", ROOT / "docs" / "beta-user-selection.md"),
     ("Invitation message", ROOT / "docs" / "beta-invitation-message.md"),
     ("User first day guide", ROOT / "docs" / "user-first-day-guide.md"),
     ("Configuration preflight", ROOT / "docs" / "beta-config-preflight.md"),
