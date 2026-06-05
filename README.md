@@ -232,6 +232,7 @@ mondo-os context --root <path>
 详见：
 
 - `docs/customer-outcome.md`
+- `docs/execution-roadmap.md`
 - `docs/beta-test-checklist.md`
 - `docs/beta-feedback-form.md`
 - `docs/beta-invitation-message.md`
