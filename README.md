@@ -236,6 +236,7 @@ mondo-os context --root <path>
 详见：
 
 - `docs/customer-outcome.md`
+- `docs/user-first-day-guide.md`
 - `docs/execution-roadmap.md`
 - `docs/github-task-guide.md`
 - `docs/first-beta-start-here.md`
