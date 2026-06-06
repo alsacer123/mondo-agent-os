@@ -13,21 +13,21 @@ Mondo Agent OS 不是独立聊天客户端，也不是完整 Agent Runtime。它
 - 工作现场协议。
 - 初始化建模流程。
 - Daily / 行动池 / 项目状态 / 下一步流转规则。
-- CLI / MCP / Agent Skill 适配。
+- Agent 使用说明、CLI / MCP / Skill 适配。
 - 安全边界、诊断和验证脚本。
 
 完整商业场景包暂不放入公开底座。内容生产、工作推进、客户交付等角色包先作为内部方法沉淀，等真实使用场景足够稳定后再决定开放边界。
 
 ## 阶段 0：公开底座可运行
 
-目标：让一个干净工作区能被初始化、检查、路由、导出上下文，并能通过 MCP 被图形化 Agent 客户端调用。
+目标：让一个干净工作区能被初始化、检查、导出上下文，并能被 Codex、Claude Code、Cherry Studio 或其他具备本地文件能力的 Agent 读取和写回。
 
 已完成：
 
 - 最小 Markdown OS 结构。
 - CLI 初始化、诊断、扫描、输入路由、实时状态和 Agent context。
-- MCP 工具入口。
-- onboarding 初始化建模流程。
+- 可选 MCP 工具入口。
+- Agent 驱动的初始化建模说明。
 - runtime、MCP、onboarding flow 验证脚本。
 
 通过标准：
@@ -46,8 +46,8 @@ python scripts/verify_onboarding_flow.py
 
 1. 用户在 Cherry Studio 或其他 Agent 客户端里请求建立个人 AI 工作系统。
 2. Agent 先引导用户讲长期方向，再讲所有当前项目，而不是只输入一条待办。
-3. onboarding 收集身份、项目、卡点、边界和本周主线。
-4. 用户确认后，系统直接写入 `_Identity/`、行动池、当天 Daily 和初始化项目文件。
+3. Agent 收集身份、项目、卡点、边界和本周主线。
+4. 用户确认后，Agent 按 Mondo OS 规则写入 `_Identity/`、行动池、当天 Daily 和真实项目文件。
 5. 第二天用户可以从早间整理继续，不需要重新解释全部背景。
 
 成功标准：
@@ -64,8 +64,8 @@ python scripts/verify_onboarding_flow.py
 优先修：
 
 - 安装和配置是否卡住普通用户。
-- Cherry Studio MCP 接入说明是否足够清楚。
-- onboarding 提问是否能让用户自然讲出项目现场。
+- Cherry Studio Agent 使用说明是否足够清楚。
+- 初始化提问是否能让用户自然讲出项目现场。
 - 写入后的文件是否让用户看得懂。
 - Daily、行动池、项目下一步的区别是否被用户理解。
 - Agent 是否会误把临时事项写成项目事实。
@@ -99,7 +99,7 @@ python scripts/verify_onboarding_flow.py
 
 阶段产物：
 
-- 更新 onboarding 问题。
+- 更新初始化问题。
 - 抽象 2-3 个高频角色包。
 - 明确哪些能力适合开源，哪些应保留为陪跑服务或私有模块。
 
@@ -130,7 +130,7 @@ python scripts/verify_onboarding_flow.py
 
 优先适配：
 
-- Cherry Studio：普通用户图形界面入口，通过 MCP 调用 Mondo。
+- Cherry Studio：普通用户图形界面入口，使用模型、记忆和本地文件能力直接操作 Mondo 工作区；MCP 作为可选辅助。
 - Codex / Claude Code：技术用户和重执行场景，通过 AGENTS / Skill / CLI 使用。
 - Cursor / Cline：代码和项目文件场景，通过项目规则和上下文文件使用。
 

@@ -6,7 +6,7 @@ It is not a new chat client, a task app, or a complete agent runtime. Its goal i
 
 > Help people turn messy work into a work scene that AI can continuously understand, update, and help move forward.
 
-The public repository contains the open base layer: workspace structure, runtime helpers, MCP tools, onboarding flow, and safety rules. Business-specific role packs and consulting workflows should live outside the public base until they are mature enough to publish.
+The public repository contains the open base layer: workspace structure, operating rules, agent prompts, runtime checks, and optional helper tools. Business-specific role packs and consulting workflows should live outside the public base until they are mature enough to publish.
 
 ## Why It Exists
 
@@ -28,16 +28,16 @@ The desired user experience is:
 1. First use: the user explains long-term direction and current projects in normal language.
 2. After setup: the user sees projects, current state, next actions, Daily, and an action pool.
 3. Morning: the system can connect yesterday's context with today's focus.
-4. During the day: loose inputs can be routed to the right layer.
+4. During the day: the user's agent can place loose inputs into the right layer.
 5. Evening: completed work, project state changes, open loops, and tomorrow's first step can be closed.
 
 ## Current Layers
 
 - Markdown OS: project rules, current state, one next step, decision log, Daily, and action pool.
-- CLI Runtime: initialize, diagnose, scan, route loose input, export live state, and export simple agent context.
-- MCP Server: lets GUI clients such as Cherry Studio use the local work scene as tools.
-- Onboarding Flow: captures long-term direction and active projects before writing a workspace.
-- Agent Skill: helps Codex/Claude-style agents create and maintain the same structure.
+- Agent Entry: Codex, Claude Code, Cherry Studio, Cursor, Cline, or another local-capable agent reads and writes the same workspace.
+- Cherry Studio Assistant Setup: use Cherry Studio's model, memory, local file access, and tool calling to operate the Mondo workspace.
+- Runtime Checks: optional CLI/MCP helpers for initialization, diagnosis, scanning, live state, and simple context export.
+- Agent Skill: helps Codex/Claude-style agents create and maintain this structure.
 - Role Packs: public examples of work-type protocols. Commercial or user-specific packs should remain separate.
 
 ## First Day
@@ -78,9 +78,17 @@ mondo-os live --root ./my-work-os
 mondo-os context --root ./my-work-os
 ```
 
-### Cherry Studio MCP
+### Cherry Studio
 
-Run the MCP server from the repository:
+Cherry Studio should be treated as an agent client, not as a thin MCP shell. Configure a Cherry Studio assistant with model access, memory, local file read/write ability, and the Mondo operating rules.
+
+Start here:
+
+- `docs/cherry-studio-agent-guide.md`
+
+Optional Mondo MCP helper tools can still be configured for diagnosis, scan, live state, and context export.
+
+Run the helper MCP server from the repository:
 
 ```bash
 python scripts/mondo_mcp.py
@@ -92,9 +100,7 @@ Or after installation:
 mondo-mcp
 ```
 
-Configuration details:
-
-- `docs/cherry-studio-mcp.md`
+The helper MCP server is not the main workflow. The main workflow is: the assistant reads the Mondo OS files, understands the user's work, and writes back according to the OS rules.
 
 ### Manual Templates
 
@@ -169,6 +175,7 @@ Write `.mondo/agent-context.md`, a simple context entry for normal chat agents.
 - `docs/security.md`
 - `docs/setup-guide.md`
 - `docs/technical-architecture.md`
+- `docs/cherry-studio-agent-guide.md`
 - `docs/cherry-studio-mcp.md`
 
 ## Agent Skill
