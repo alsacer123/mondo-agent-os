@@ -44,7 +44,15 @@ The desired user experience is:
 
 New users do not need to read every technical document first.
 
-Start with:
+If you already use Codex, Claude Code, Obsidian, or Markdown workflows, start with the 10-minute skilled-user test:
+
+- `docs/10-minute-skilled-user-test.md`
+
+If you use Cherry Studio as the main agent client, start with:
+
+- `docs/cherry-studio-agent-guide.md`
+
+If you want the general non-technical first-day explanation, read:
 
 - `docs/user-first-day-guide.md`
 
@@ -167,6 +175,7 @@ Write `.mondo/agent-context.md`, a simple context entry for normal chat agents.
 ## Methodology
 
 - `docs/customer-outcome.md`
+- `docs/10-minute-skilled-user-test.md`
 - `docs/user-first-day-guide.md`
 - `docs/execution-roadmap.md`
 - `docs/github-task-guide.md`
